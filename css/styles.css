@@ -1,0 +1,8 @@
+body{
+background-color: rgba(55, 0, 255, 0.664);
+}
+canvas { 
+display : block; 
+margin : auto;
+margin-top:10%;
+}
