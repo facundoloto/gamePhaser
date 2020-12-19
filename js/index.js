@@ -1,6 +1,7 @@
-import { Bootloader} from '/Game/js/bootloader.js' //las rutas se manejan asi en phaser y xampp
-import { Game} from '/Game/js/game.js'
-import { Game2} from '/Game/js/game2.js'
+import { Bootloader} from '/gamePhaser/js/bootloader.js' //las rutas se manejan asi en phaser y xampp
+import { Game} from '/gamePhaser/js/game.js'
+import { Game2} from '/gamePhaser/js/game2.js'
+
 const config = {
   type: Phaser.AUTO,
   width: 800,

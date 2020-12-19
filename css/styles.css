@@ -1,8 +1,11 @@
 body{
-background-color: rgba(55, 0, 255, 0.664);
+background-color: rgb(83, 79, 79);
+background-size: contain;
+
 }
 canvas { 
 display : block; 
 margin : auto;
 margin-top:10%;
+border-radius:10%;
 }

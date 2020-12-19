@@ -9,20 +9,27 @@ init(){
 
 }
 
-
+StarImpact(sprite,star) //cambia de escena
+{
+star.disableBody(true, true);
+this.scene.pause('Game2')
+this.scene.start('Game')
+}
 create() {
 
 this.gameover=this.add.image(400,300, 'over')
 this.gameover.visible=false
 const platforms = this.physics.add.staticGroup();//esto hace que la fisica se aplique a todas las plataformas
 this.add.image(400,300,"background")
-this.Jugador=new Jugador(this,200,300,'dude');//es importar cargar esto antes del backgraound
+
 
 platforms.create(350, 200, 'ground').setScale(2).refreshBody();
 platforms.create(500, 380, 'ground');
+platforms.create(0, 220, 'ground')
 
-
-
+this.Jugador=new Jugador(this,0,0,'dude');//es importar cargar esto antes del backgraound
+const star = this.physics.add.staticGroup();
+star.create(500,350,'star')
 // propiedades del coliciones y salto del Jugador
 //se limita a moverse dentro de la escena*/
 //animaciones para cuando se mueva a la derecha o izquierda
@@ -33,11 +40,7 @@ frameRate: 10,
 repeat: -1
 })
 
-this.anims.create({
-key: 'turn',
-frames: [ { key: 'dude', frame: 4 } ],
-frameRate: 20
-})
+
 
 this.anims.create({
 key: 'right',
@@ -50,8 +53,9 @@ repeat: -1
 
 this.physics.add.collider(this.Jugador,platforms)
 this.cursors = this.input.keyboard.createCursorKeys();
-
-this.load.on("complete" ,()=>{this.scene.start('Game')})
+this.physics.add.collider(star,platforms)
+this.physics.add.collider(this.Jugador,star, this.StarImpact,() =>true, this);
+this.cursors = this.input.keyboard.createCursorKeys();
 
 }
 
@@ -63,6 +67,7 @@ if (this.cursors.left.isDown)
 this.Jugador.left()
 
 this.Jugador.anims.play('left', true);
+
 }
 else if (this.cursors.right.isDown)
 {
@@ -70,11 +75,12 @@ this.Jugador.right()
 
 
 this.Jugador.anims.play('right', true);
+
 }
 else{
 this.Jugador.turn()
 
-this.Jugador.anims.play('turn'); //si no se apreta ninguna tecla se queda en 0 asi no se mueve
+
 }
 if (this.cursors.up.isDown && this.Jugador.body.touching.down)
 {
