@@ -1,4 +1,5 @@
-/*export class Menu extends Phaser.Scene {
+
+export class Menu extends Phaser.Scene {
     constructor() {
     super({ key: 'Menu' });
     
@@ -8,13 +9,30 @@
     }
     preload(){
    
-    this.load.image("background","/gamePhaser/assets/PixelArt.png")
-    this.load.image("start","/gamePhaser/assets/start.png")
+    this.load.image("background1","/gamePhaser/assets/menu.gif")
+    this.load.image("start","/gamePhaser/assets/enter.png")
+    this.load.audio("intro","/gamePhaser/assets/zelda.mp3")
     }
     create(){
-    this.add.image(400,300, 'background')
-    this.add.image(400,300, 'start')
+    this.fondo=this.sound.add('intro',{loop:true})
+    this.fondo.play()
+    this.add.image(400,300, 'background1')
+    this.start=this.add.image(400,300, 'start')
+   
+    this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+   
+    
     }
-    update(){}
+    update(){
+     if(this.enter.isDown){
+        this.fondo.stop()
+      
+        this.scene.pause('Menu')
+       
+       
+        this.scene.start('Main')  
+     }
+   
     }
-    */
+    }
+    
